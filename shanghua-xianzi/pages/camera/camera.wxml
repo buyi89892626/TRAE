@@ -1,0 +1,89 @@
+<view class="camera-page">
+  <!-- 相机预览 -->
+  <camera 
+    wx:if="{{!showPreview}}"
+    class="camera-view" 
+    device-position="{{devicePosition}}" 
+    flash="{{flash}}"
+    binderror="onCameraError"
+    bindinitdone="onCameraInitDone"
+  >
+    <!-- 顶部操作栏 -->
+    <view class="camera-top-bar">
+      <view class="top-btn back-btn" bindtap="goBack">
+        <text>✕</text>
+      </view>
+      <view class="top-title">拍照识花</view>
+      <view class="top-btn flash-btn" bindtap="toggleFlash">
+        <text wx:if="{{flash === 'off'}}">⚡</text>
+        <text wx:elif="{{flash === 'on'}}">💡</text>
+        <text wx:elif="{{flash === 'auto'}}">🔄</text>
+        <text wx:else>🔦</text>
+      </view>
+    </view>
+
+    <!-- 取景框 -->
+    <view class="guide-overlay">
+      <view class="guide-box {{isBlurry ? 'blurry' : ''}}">
+        <view class="guide-corner tl"></view>
+        <view class="guide-corner tr"></view>
+        <view class="guide-corner bl"></view>
+        <view class="guide-corner br"></view>
+        <view class="guide-line-1"></view>
+        <view class="guide-line-2"></view>
+      </view>
+
+      <!-- 提示文字 -->
+      <view class="guide-tip">
+        <text>🌸 {{guideText}}</text>
+      </view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="camera-bottom-bar">
+      <view class="bottom-btn album-btn" bindtap="chooseFromAlbum">
+        <text class="btn-icon">🖼️</text>
+        <text class="btn-text">相册</text>
+      </view>
+
+      <view class="shutter-wrapper">
+        <view class="shutter-outer">
+          <view class="shutter-inner {{isShooting ? 'shooting' : ''}}" bindtap="takePhoto">
+          </view>
+        </view>
+        <text class="shutter-tip">拍照识别</text>
+      </view>
+
+      <view class="bottom-btn switch-btn" bindtap="switchCamera">
+        <text class="btn-icon">🔄</text>
+        <text class="btn-text">翻转</text>
+      </view>
+    </view>
+  </camera>
+
+  <!-- 预览确认页 -->
+  <view wx:if="{{showPreview}}" class="preview-page">
+    <image class="preview-image" src="{{previewImage}}" mode="aspectFill"></image>
+    
+    <view class="preview-top-bar">
+      <view class="top-btn back-btn" bindtap="retakePhoto">
+        <text>←</text>
+      </view>
+      <view class="top-title">确认照片</view>
+      <view class="top-btn placeholder"></view>
+    </view>
+
+    <view class="preview-tip">
+      <text>🌸 这张照片可以吗？</text>
+    </view>
+
+    <view class="preview-bottom-bar">
+      <button class="preview-btn retake-btn" bindtap="retakePhoto">
+        重新拍摄
+      </button>
+      <button class="preview-btn confirm-btn" bindtap="confirmIdentify">
+        开始识别
+      </button>
+    </view>
+  </view>
+</view>

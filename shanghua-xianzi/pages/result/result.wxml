@@ -1,0 +1,244 @@
+<view class="result-page {{fontClass}}">
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-page">
+    <view class="loading-icon">🌸</view>
+    <text class="loading-text">花仙子正在赶来...</text>
+  </view>
+
+  <view wx:else class="result-content">
+    <!-- 顶部图片区 -->
+    <view class="image-section">
+      <swiper class="image-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#FF6B9D">
+        <swiper-item wx:if="{{userImage}}">
+          <image class="flower-image" src="{{userImage}}" mode="aspectFill" bindlongpress="saveImage"></image>
+        </swiper-item>
+        <swiper-item>
+          <view class="flower-image placeholder">
+            <text class="flower-emoji">🌺</text>
+          </view>
+        </swiper-item>
+      </swiper>
+
+      <!-- 顶部操作栏 -->
+      <view class="top-bar">
+        <view class="top-btn" bindtap="goBack">
+          <text>←</text>
+        </view>
+        <view class="top-btn" bindtap="goHome">
+          <text>🏠</text>
+        </view>
+      </view>
+
+      <!-- 置信度标签 -->
+      <view class="score-badge score-{{scoreLevel}}">
+        <text class="score-num">{{scorePercent}}</text>
+        <text class="score-label">匹配度</text>
+      </view>
+    </view>
+
+    <!-- 花卉名称区 -->
+    <view class="name-section">
+      <view class="flower-name-row">
+        <text class="flower-name">{{flower.name}}</text>
+        <view class="voice-btn" bindtap="playVoice">
+          <text>🔊</text>
+        </view>
+        <view class="favorite-btn {{isFavorite ? 'active' : ''}}" bindtap="toggleFavorite">
+          <text>{{isFavorite ? '❤️' : '🤍'}}</text>
+        </view>
+      </view>
+      <text class="flower-alias">别名：{{flower.alias}}</text>
+      <view class="flower-tags">
+        <text class="tag tag-pink">{{flower.family}}</text>
+        <text class="tag tag-yellow">花期{{flower.flowerPeriod}}</text>
+        <text class="tag tag-purple" wx:if="{{flower.category === 'flower'}}">观赏花卉</text>
+        <text class="tag tag-green" wx:if="{{flower.category === 'succulent'}}">多肉植物</text>
+        <text class="tag tag-pink" wx:if="{{flower.category === 'herb'}}">草本植物</text>
+      </view>
+    </view>
+
+    <!-- Tab切换 -->
+    <view class="tab-bar">
+      <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="0">
+        <text>🌿 简介</text>
+      </view>
+      <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="1">
+        <text>💧 养护</text>
+      </view>
+      <view class="tab-item {{currentTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-tab="2">
+        <text>⚠️ 安全</text>
+      </view>
+      <view class="tab-item {{currentTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-tab="3">
+        <text>📜 花语</text>
+      </view>
+    </view>
+
+    <!-- Tab内容 -->
+    <view class="tab-content">
+      <!-- 简介 -->
+      <view wx:if="{{currentTab === 0}}" class="tab-panel">
+        <view class="info-card">
+          <view class="info-title">
+            <text class="title-icon">🌸</text>
+            <text>植物百科</text>
+          </view>
+          <text class="info-text">{{flower.description}}</text>
+        </view>
+
+        <view class="info-card">
+          <view class="info-title">
+            <text class="title-icon">🏡</text>
+            <text>原产地</text>
+          </view>
+          <text class="info-text">{{flower.origin}}</text>
+        </view>
+
+        <view class="info-card" wx:if="{{flower.medicinal}}">
+          <view class="info-title">
+            <text class="title-icon">💊</text>
+            <text>药用价值</text>
+          </view>
+          <text class="info-text">{{flower.medicinal}}</text>
+        </view>
+
+        <view class="info-card" wx:if="{{flower.tips}}">
+          <view class="info-title">
+            <text class="title-icon">💡</text>
+            <text>趣味小知识</text>
+          </view>
+          <text class="info-text">{{flower.tips}}</text>
+        </view>
+      </view>
+
+      <!-- 养护 -->
+      <view wx:if="{{currentTab === 1}}" class="tab-panel">
+        <view class="care-grid">
+          <view class="care-item">
+            <view class="care-icon water">💧</view>
+            <view class="care-info">
+              <text class="care-label">浇水</text>
+              <text class="care-desc">{{flower.care.water}}</text>
+            </view>
+          </view>
+
+          <view class="care-item">
+            <view class="care-icon light">☀️</view>
+            <view class="care-info">
+              <text class="care-label">光照</text>
+              <text class="care-desc">{{flower.care.light}}</text>
+            </view>
+          </view>
+
+          <view class="care-item">
+            <view class="care-icon temp">🌡️</view>
+            <view class="care-info">
+              <text class="care-label">温度</text>
+              <text class="care-desc">{{flower.care.temperature}}</text>
+            </view>
+          </view>
+
+          <view class="care-item">
+            <view class="care-icon soil">🪴</view>
+            <view class="care-info">
+              <text class="care-label">土壤</text>
+              <text class="care-desc">{{flower.care.soil}}</text>
+            </view>
+          </view>
+
+          <view class="care-item">
+            <view class="care-icon fertilizer">🌱</view>
+            <view class="care-info">
+              <text class="care-label">施肥</text>
+              <text class="care-desc">{{flower.care.fertilizer}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 安全 -->
+      <view wx:if="{{currentTab === 2}}" class="tab-panel">
+        <view class="safety-card level-{{flower.toxicity.level}}">
+          <view class="safety-icon">
+            <text wx:if="{{flower.toxicity.level === 'safe'}}">✅</text>
+            <text wx:elif="{{flower.toxicity.level === 'caution'}}">⚠️</text>
+            <text wx:else">☠️</text>
+          </view>
+          <view class="safety-info">
+            <text class="safety-level">
+              {{flower.toxicity.level === 'safe' ? '安全无毒' : flower.toxicity.level === 'caution' ? '谨慎接触' : '有毒植物'}}
+            </text>
+            <text class="safety-desc">{{flower.toxicity.description}}</text>
+          </view>
+        </view>
+
+        <view class="safety-tips">
+          <view class="tip-item">
+            <text class="tip-icon">👶</text>
+            <text class="tip-text">请放在儿童接触不到的地方</text>
+          </view>
+          <view class="tip-item">
+            <text class="tip-icon">🐾</text>
+            <text class="tip-text">注意宠物是否会啃食植物</text>
+          </view>
+          <view class="tip-item">
+            <text class="tip-icon">🍴</text>
+            <text class="tip-text">不明植物切勿随意食用</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 花语 -->
+      <view wx:if="{{currentTab === 3}}" class="tab-panel">
+        <view class="flower-language-card">
+          <view class="lang-header">
+            <text class="lang-icon">💝</text>
+            <text class="lang-title">花语</text>
+          </view>
+          <text class="lang-text">{{flower.flowerLanguage}}</text>
+        </view>
+
+        <view class="poem-card">
+          <view class="poem-header">
+            <text class="poem-icon">📜</text>
+            <text class="poem-title">赏花诗词</text>
+          </view>
+          <view class="poem-content">
+            <text class="poem-text">{{flower.poem}}</text>
+            <text class="poem-author">—— {{flower.poemAuthor}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 相似花卉推荐（会员） -->
+    <view class="candidates-section" wx:if="{{candidates.length > 0}}">
+      <view class="section-title">相似花卉</view>
+      <scroll-view class="candidates-scroll" scroll-x>
+        <view class="candidate-item" wx:for="{{candidates}}" wx:key="id" bindtap="showCandidate" data-id="{{item.id}}">
+          <view class="candidate-img">
+            <text class="candidate-emoji">🌷</text>
+            <view class="candidate-score">{{(item.score * 100).toFixed(0)}}%</view>
+          </view>
+          <text class="candidate-name">{{item.name}}</text>
+          <view class="vip-tag" wx:if="{{!isVip}}">会员</view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar safe-bottom">
+      <button class="action-btn secondary" bindtap="toggleFavorite">
+        <text class="btn-icon">{{isFavorite ? '❤️' : '🤍'}}</text>
+        <text>{{isFavorite ? '已收藏' : '收藏'}}</text>
+      </button>
+      <button class="action-btn primary" bindtap="shareToCommunity">
+        <text class="btn-icon">🌸</text>
+        <text>分享花友圈</text>
+      </button>
+      <button class="action-btn outline" open-type="share">
+        <text class="btn-icon">📤</text>
+        <text>分享好友</text>
+      </button>
+    </view>
+  </view>
+</view>

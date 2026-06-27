@@ -1,0 +1,108 @@
+<view class="collection-page {{fontClass}}">
+  <!-- 顶部导航 -->
+  <view class="page-header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="page-title">我的花园</text>
+      <text class="page-subtitle">记录每一次遇见的美好</text>
+    </view>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-header">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="0">
+      <text class="tab-icon">📸</text>
+      <text>识别记录</text>
+      <text class="tab-count">{{historyList.length}}</text>
+    </view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="1">
+      <text class="tab-icon">❤️</text>
+      <text>我的收藏</text>
+      <text class="tab-count">{{favoriteList.length}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrapper">
+      <text class="search-icon">🔍</text>
+      <input 
+        class="search-input" 
+        placeholder="搜索花卉名称" 
+        placeholder-style="color: #CC99AA"
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+      />
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="category-scroll" scroll-x show-scrollbar="{{false}}">
+    <view class="category-list">
+      <view 
+        class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="id"
+        bindtap="switchCategory"
+        data-category="{{item.id}}"
+      >
+        <text class="category-icon">{{item.icon}}</text>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 列表内容 -->
+  <view class="list-content">
+    <view wx:if="{{filteredHistory.length === 0}}" class="empty-state">
+      <view class="empty-icon">🌸</view>
+      <text class="empty-text">
+        {{currentTab === 0 ? '还没有识别记录哦' : '还没有收藏的花卉'}}
+      </text>
+      <button class="empty-btn" bindtap="goToIdentify">
+        去识别花卉
+      </button>
+    </view>
+
+    <view wx:else class="flower-list">
+      <view 
+        class="flower-card" 
+        wx:for="{{filteredHistory}}" 
+        wx:key="id"
+        bindtap="goToDetail"
+        data-id="{{item.flowerId || item.id}}"
+        data-name="{{item.name}}"
+        data-img="{{item.image}}"
+      >
+        <view class="card-img">
+          <image wx:if="{{item.image}}" src="{{item.image}}" mode="aspectFill" class="card-image"></image>
+          <view wx:else class="card-emoji">
+            <text>🌷</text>
+          </view>
+          <view class="score-tag" wx:if="{{item.score}}">
+            {{(item.score * 100).toFixed(0)}}%
+          </view>
+        </view>
+        <view class="card-info">
+          <text class="card-name">{{item.name}}</text>
+          <text class="card-alias">{{item.alias}}</text>
+          <view class="card-bottom">
+            <text class="card-time">🕐 {{item.displayTime}}</text>
+            <view class="card-action" catchtap="{{currentTab === 0 ? 'deleteHistory' : 'removeFavorite'}}" data-id="{{item.id}}">
+              <text>{{currentTab === 0 ? '🗑️' : '💔'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 清空按钮 -->
+  <view wx:if="{{currentTab === 0 && historyList.length > 0}}" class="footer-action">
+    <button class="clear-btn" bindtap="clearAllHistory">
+      清空所有记录
+    </button>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

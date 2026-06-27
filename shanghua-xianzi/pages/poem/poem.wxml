@@ -1,0 +1,91 @@
+<view class="poem-page {{fontClass}}">
+  <!-- 每日花语大卡片 -->
+  <view class="daily-section">
+    <view class="daily-card">
+      <view class="card-header">
+        <text class="daily-label">🌸 今日花语</text>
+        <text class="daily-date">{{todayDate}}</text>
+      </view>
+
+      <view class="flower-name-section">
+        <text class="daily-flower">{{dailyPoem.flower}}</text>
+        <view class="actions-row">
+          <view class="mini-btn" bindtap="nextPoem">
+            <text>🔄</text>
+          </view>
+          <view class="mini-btn" bindtap="playPoem" data-content="{{dailyPoem.content}}">
+            <text>🔊</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="poem-content-section">
+        <text class="poem-text">{{dailyPoem.content}}</text>
+        <text class="poem-author">—— {{dailyPoem.author}}《{{dailyPoem.title}}》</text>
+      </view>
+
+      <view class="card-footer">
+        <button class="footer-btn primary" bindtap="generateCard">
+          生成诗签
+        </button>
+        <button class="footer-btn outline" open-type="share">
+          分享
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="0">
+      <text>📜 古诗词</text>
+    </view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="1">
+      <text>💝 花语大全</text>
+    </view>
+  </view>
+
+  <!-- 内容区 -->
+  <view class="content-section">
+    <!-- 古诗词列表 -->
+    <view wx:if="{{currentTab === 0}}" class="poem-list">
+      <view class="poem-item" wx:for="{{poemList}}" wx:key="id">
+        <view class="poem-item-header">
+          <view class="poem-flower-tag">
+            <text>🌸 {{item.flower}}</text>
+          </view>
+          <view class="poem-item-actions">
+            <view class="action-icon" bindtap="playPoem" data-content="{{item.content}}">🔊</view>
+            <view class="action-icon" bindtap="collectPoem" data-id="{{item.id}}">
+              {{collectedPoems.includes(item.id) ? '❤️' : '🤍'}}
+            </view>
+          </view>
+        </view>
+        <view class="poem-item-content">
+          <text class="item-poem-text">{{item.content}}</text>
+          <text class="item-poem-author">—— {{item.author}}《{{item.title}}》</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 花语大全 -->
+    <view wx:if="{{currentTab === 1}}" class="language-list">
+      <view 
+        class="language-item" 
+        wx:for="{{flowerLanguageList}}" 
+        wx:key="id"
+        bindtap="goToFlowerDetail"
+        data-id="{{item.id}}"
+      >
+        <view class="lang-flower-icon">🌺</view>
+        <view class="lang-info">
+          <text class="lang-flower-name">{{item.name}}</text>
+          <text class="lang-text">{{item.flowerLanguage}}</text>
+        </view>
+        <view class="lang-arrow">›</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

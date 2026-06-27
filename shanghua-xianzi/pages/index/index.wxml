@@ -1,0 +1,122 @@
+<view class="index-page {{fontClass}}">
+  <!-- 顶部问候区 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="greeting">
+        <text class="greeting-text">🌸 赏花仙子</text>
+        <text class="date-text">{{todayDate}}</text>
+      </view>
+      <view class="greeting-sub">
+        <text>一花一世界 · 一叶一菩提</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 轮播横幅 -->
+  <swiper class="banner-swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="4000" duration="500" indicator-active-color="#FF6B9D" indicator-color="rgba(255,255,255,0.5)">
+    <swiper-item wx:for="{{bannerList}}" wx:key="id">
+      <view class="banner-item" style="background: {{item.color}}">
+        <view class="banner-content">
+          <text class="banner-title">{{item.title}}</text>
+          <text class="banner-subtitle">{{item.subtitle}}</text>
+        </view>
+        <view class="banner-icon">🌺</view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 核心操作区 -->
+  <view class="action-section">
+    <view class="action-card main-action" bindtap="goToCamera">
+      <view class="action-icon-wrapper">
+        <text class="action-icon">📷</text>
+      </view>
+      <view class="action-text">
+        <text class="action-title">拍照识花</text>
+        <text class="action-desc">对准花朵，一键识别</text>
+      </view>
+      <view class="action-arrow">›</view>
+    </view>
+
+    <view class="action-card secondary-action" bindtap="chooseFromAlbum">
+      <view class="action-icon-wrapper secondary">
+        <text class="action-icon">🖼️</text>
+      </view>
+      <view class="action-text">
+        <text class="action-title">相册选图</text>
+        <text class="action-desc">从相册选择照片识别</text>
+      </view>
+      <view class="action-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-entry">
+    <view class="entry-item" bindtap="goToCollection">
+      <view class="entry-icon pink">📚</view>
+      <text class="entry-text">识别记录</text>
+    </view>
+    <view class="entry-item" bindtap="goToCollection">
+      <view class="entry-icon yellow">❤️</view>
+      <text class="entry-text">我的收藏</text>
+    </view>
+    <view class="entry-item" bindtap="goToPoem">
+      <view class="entry-icon purple">📜</view>
+      <text class="entry-text">花语诗签</text>
+    </view>
+    <view class="entry-item" bindtap="goToCommunity">
+      <view class="entry-icon green">👥</view>
+      <text class="entry-text">花友圈</text>
+    </view>
+  </view>
+
+  <!-- 每日花语 -->
+  <view class="section-title">每日花语</view>
+  <view class="poem-card" bindtap="goToPoem">
+    <view class="poem-decor">🌸</view>
+    <view class="poem-content">
+      <text class="poem-flower">{{dailyPoem.flower}}</text>
+      <text class="poem-text">{{dailyPoem.content}}</text>
+      <text class="poem-author">—— {{dailyPoem.author}}《{{dailyPoem.title}}》</text>
+    </view>
+    <view class="poem-arrow">›</view>
+  </view>
+
+  <!-- 推荐花卉 -->
+  <view class="section-title">今日推荐</view>
+  <view class="recommend-list">
+    <view class="recommend-item" wx:for="{{recommendFlowers}}" wx:key="id" bindtap="goToFlowerDetail" data-id="{{item.id}}">
+      <view class="recommend-img">
+        <text class="flower-emoji">🌷</text>
+      </view>
+      <view class="recommend-info">
+        <text class="recommend-name">{{item.name}}</text>
+        <text class="recommend-alias">{{item.alias}}</text>
+        <view class="recommend-tags">
+          <text class="tag tag-pink">{{item.family}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部统计 -->
+  <view class="footer-stats">
+    <view class="stat-item">
+      <text class="stat-num">{{identifyCount}}</text>
+      <text class="stat-label">次识别</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">20000+</text>
+      <text class="stat-label">花卉库</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">96%</text>
+      <text class="stat-label">准确率</text>
+    </view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

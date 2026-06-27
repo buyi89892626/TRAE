@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/camera/camera",
+    "pages/result/result",
+    "pages/collection/collection",
+    "pages/community/community",
+    "pages/profile/profile",
+    "pages/poem/poem"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF6B9D",
+    "navigationBarTitleText": "赏花仙子",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FFF5F8"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF6B9D",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "识花",
+        "iconPath": "images/tab/flower.png",
+        "selectedIconPath": "images/tab/flower-active.png"
+      },
+      {
+        "pagePath": "pages/poem/poem",
+        "text": "花语",
+        "iconPath": "images/tab/poem.png",
+        "selectedIconPath": "images/tab/poem-active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "花友圈",
+        "iconPath": "images/tab/community.png",
+        "selectedIconPath": "images/tab/community-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab/profile.png",
+        "selectedIconPath": "images/tab/profile-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于推荐附近的赏花地点"
+    },
+    "scope.camera": {
+      "desc": "用于拍摄花卉进行识别"
+    }
+  },
+  "requiredPrivateInfos": [
+    "chooseMedia",
+    "chooseImage"
+  ],
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

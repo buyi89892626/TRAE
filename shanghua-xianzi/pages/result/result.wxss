@@ -1,0 +1,597 @@
+.result-page {
+  min-height: 100vh;
+  background: #FFF5F8;
+  padding-bottom: 160rpx;
+}
+
+.loading-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-icon {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20rpx); }
+}
+
+.loading-text {
+  font-size: 32rpx;
+  color: #FF6B9D;
+}
+
+.result-content {
+  padding-bottom: 40rpx;
+}
+
+/* 图片区 */
+.image-section {
+  position: relative;
+  width: 100%;
+  height: 520rpx;
+}
+
+.image-swiper {
+  width: 100%;
+  height: 520rpx;
+}
+
+.flower-image {
+  width: 100%;
+  height: 100%;
+}
+
+.flower-image.placeholder {
+  background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 50%, #F3E5F5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flower-emoji {
+  font-size: 180rpx;
+}
+
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 60rpx 32rpx 20rpx;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+}
+
+.top-btn {
+  width: 72rpx;
+  height: 72rpx;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.score-badge {
+  position: absolute;
+  bottom: 24rpx;
+  right: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  backdrop-filter: blur(10px);
+}
+
+.score-badge.score-high {
+  background: rgba(46, 125, 50, 0.9);
+}
+
+.score-badge.score-medium {
+  background: rgba(249, 168, 37, 0.9);
+}
+
+.score-badge.score-low {
+  background: rgba(198, 40, 40, 0.9);
+}
+
+.score-num {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.score-label {
+  font-size: 22rpx;
+  color: rgba(255,255,255,0.9);
+}
+
+/* 名称区 */
+.name-section {
+  background: white;
+  margin: -30rpx 24rpx 0;
+  border-radius: 28rpx 28rpx 0 0;
+  padding: 32rpx;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 -4rpx 20rpx rgba(255, 107, 157, 0.1);
+}
+
+.flower-name-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.flower-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #C44569;
+  flex: 1;
+}
+
+.voice-btn, .favorite-btn {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16rpx;
+  font-size: 32rpx;
+}
+
+.voice-btn {
+  background: #E8F5E9;
+}
+
+.favorite-btn {
+  background: #FFEBEE;
+}
+
+.favorite-btn.active {
+  background: #FFCDD2;
+}
+
+.flower-alias {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+}
+
+.flower-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Tab栏 */
+.tab-bar {
+  display: flex;
+  background: white;
+  margin: 0 24rpx;
+  padding: 0 16rpx;
+  border-bottom: 1rpx solid #FFE4EC;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0;
+  font-size: 28rpx;
+  color: #999;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  color: #FF6B9D;
+  font-weight: 500;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48rpx;
+  height: 6rpx;
+  background: linear-gradient(90deg, #FF6B9D, #C44569);
+  border-radius: 3rpx;
+}
+
+/* Tab内容 */
+.tab-content {
+  background: white;
+  margin: 0 24rpx 24rpx;
+  border-radius: 0 0 24rpx 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255, 107, 157, 0.08);
+}
+
+.tab-panel {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 信息卡片 */
+.info-card {
+  margin-bottom: 24rpx;
+}
+
+.info-card:last-child {
+  margin-bottom: 0;
+}
+
+.info-title {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.title-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.info-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* 养护网格 */
+.care-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.care-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #FFF0F5;
+}
+
+.care-item:last-child {
+  border-bottom: none;
+}
+
+.care-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.care-icon.water {
+  background: #E3F2FD;
+}
+
+.care-icon.light {
+  background: #FFF8E1;
+}
+
+.care-icon.temp {
+  background: #FFEBEE;
+}
+
+.care-icon.soil {
+  background: #EFEBE9;
+}
+
+.care-icon.fertilizer {
+  background: #E8F5E9;
+}
+
+.care-info {
+  flex: 1;
+}
+
+.care-label {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6rpx;
+  display: block;
+}
+
+.care-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 安全卡片 */
+.safety-card {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  border-radius: 20rpx;
+  margin-bottom: 24rpx;
+}
+
+.safety-card.level-safe {
+  background: #E8F5E9;
+}
+
+.safety-card.level-caution {
+  background: #FFF8E1;
+}
+
+.safety-card.level-poisonous {
+  background: #FFEBEE;
+}
+
+.safety-icon {
+  font-size: 56rpx;
+  margin-right: 24rpx;
+}
+
+.safety-info {
+  flex: 1;
+}
+
+.safety-level {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.safety-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.safety-tips {
+  background: #FFF9FB;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.tip-item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.tip-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 花语卡片 */
+.flower-language-card {
+  background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EC 100%);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  text-align: center;
+}
+
+.lang-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.lang-icon {
+  font-size: 36rpx;
+  margin-right: 8rpx;
+}
+
+.lang-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #C44569;
+}
+
+.lang-text {
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #C44569;
+  line-height: 1.6;
+}
+
+.poem-card {
+  background: #FFFAF0;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  border: 2rpx solid #FFE4B5;
+}
+
+.poem-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.poem-icon {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+}
+
+.poem-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #B8860B;
+}
+
+.poem-content {
+  text-align: center;
+}
+
+.poem-text {
+  font-size: 30rpx;
+  color: #8B4513;
+  line-height: 2;
+  font-style: italic;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.poem-author {
+  font-size: 26rpx;
+  color: #D2691E;
+}
+
+/* 相似花卉 */
+.candidates-section {
+  margin-top: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin: 0 32rpx 16rpx;
+  padding-left: 16rpx;
+  border-left: 8rpx solid #FF6B9D;
+}
+
+.candidates-scroll {
+  white-space: nowrap;
+  padding: 0 24rpx;
+}
+
+.candidate-item {
+  display: inline-block;
+  width: 180rpx;
+  margin-right: 20rpx;
+  text-align: center;
+  position: relative;
+}
+
+.candidate-img {
+  width: 180rpx;
+  height: 180rpx;
+  background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 100%);
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 12rpx;
+}
+
+.candidate-emoji {
+  font-size: 72rpx;
+}
+
+.candidate-score {
+  position: absolute;
+  bottom: 8rpx;
+  right: 8rpx;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+}
+
+.candidate-name {
+  font-size: 26rpx;
+  color: #333;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vip-tag {
+  position: absolute;
+  top: 8rpx;
+  left: 8rpx;
+  background: linear-gradient(135deg, #F8B500, #FF8C00);
+  color: white;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx 24rpx;
+  background: white;
+  box-shadow: 0 -4rpx 20rpx rgba(255, 107, 157, 0.1);
+  z-index: 100;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8rpx;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-btn .btn-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+  color: white;
+  flex: 1.5;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 157, 0.4);
+}
+
+.action-btn.secondary {
+  background: #FFF0F5;
+  color: #C44569;
+}
+
+.action-btn.outline {
+  background: white;
+  color: #FF6B9D;
+  border: 2rpx solid #FF6B9D;
+}

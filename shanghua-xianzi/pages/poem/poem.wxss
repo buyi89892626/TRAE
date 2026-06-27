@@ -1,0 +1,293 @@
+.poem-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF5F8 0%, #FFF0F5 50%, #FFFAF0 100%);
+  padding-bottom: 40rpx;
+}
+
+/* 每日花语大卡片 */
+.daily-section {
+  padding: 40rpx 24rpx 24rpx;
+}
+
+.daily-card {
+  background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 50%, #F3E5F5 100%);
+  border-radius: 32rpx;
+  padding: 36rpx;
+  box-shadow: 0 12rpx 40rpx rgba(255, 107, 157, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.daily-card::before {
+  content: '🌸';
+  position: absolute;
+  top: -20rpx;
+  right: 40rpx;
+  font-size: 160rpx;
+  opacity: 0.1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.daily-label {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #C44569;
+}
+
+.daily-date {
+  font-size: 24rpx;
+  color: #999;
+  background: rgba(255,255,255,0.6);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.flower-name-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.daily-flower {
+  font-size: 52rpx;
+  font-weight: bold;
+  color: #C44569;
+  text-shadow: 0 2rpx 8rpx rgba(255,255,255,0.8);
+}
+
+.actions-row {
+  display: flex;
+}
+
+.mini-btn {
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12rpx;
+  font-size: 28rpx;
+}
+
+.poem-content-section {
+  background: rgba(255,255,255,0.6);
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+}
+
+.poem-text {
+  font-size: 32rpx;
+  color: #8B4513;
+  line-height: 2;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+
+.poem-author {
+  font-size: 26rpx;
+  color: #A0522D;
+  display: block;
+  text-align: right;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  gap: 24rpx;
+}
+
+.footer-btn {
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  padding: 0 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-btn::after {
+  border: none;
+}
+
+.footer-btn.primary {
+  background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+  color: white;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.4);
+}
+
+.footer-btn.outline {
+  background: rgba(255,255,255,0.8);
+  color: #C44569;
+  border: 2rpx solid #FF6B9D;
+}
+
+/* Tab栏 */
+.tab-bar {
+  display: flex;
+  background: white;
+  margin: 0 24rpx 24rpx;
+  border-radius: 20rpx;
+  padding: 8rpx;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.08);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+  color: white;
+  font-weight: 500;
+}
+
+/* 内容区 */
+.content-section {
+  padding: 0 24rpx;
+}
+
+/* 古诗词列表 */
+.poem-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.poem-item {
+  background: white;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.06);
+}
+
+.poem-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.poem-flower-tag {
+  background: #FFE4EC;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.poem-flower-tag text {
+  font-size: 24rpx;
+  color: #C44569;
+  font-weight: 500;
+}
+
+.poem-item-actions {
+  display: flex;
+}
+
+.action-icon {
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  padding: 8rpx;
+}
+
+.poem-item-content {
+  background: #FFFAF0;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  border-left: 6rpx solid #F8B500;
+}
+
+.item-poem-text {
+  font-size: 28rpx;
+  color: #8B4513;
+  line-height: 1.8;
+  font-style: italic;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.item-poem-author {
+  font-size: 24rpx;
+  color: #A0522D;
+  display: block;
+  text-align: right;
+}
+
+/* 花语大全 */
+.language-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.language-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.06);
+}
+
+.lang-flower-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.lang-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lang-flower-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.lang-text {
+  font-size: 26rpx;
+  color: #999;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lang-arrow {
+  font-size: 36rpx;
+  color: #CCC;
+  margin-left: 12rpx;
+}
+
+.safe-bottom {
+  height: 40rpx;
+}

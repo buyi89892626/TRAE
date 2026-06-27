@@ -1,0 +1,398 @@
+.index-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF5F8 0%, #FFF0F5 50%, #FFFAF0 100%);
+}
+
+/* 顶部头部 */
+.header {
+  position: relative;
+  padding: 40rpx 32rpx 60rpx;
+  overflow: hidden;
+}
+
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300rpx;
+  background: linear-gradient(135deg, #FF6B9D 0%, #C44569 50%, #F8B500 100%);
+  border-radius: 0 0 60rpx 60rpx;
+  opacity: 0.9;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.greeting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.greeting-text {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+}
+
+.date-text {
+  font-size: 28rpx;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.2);
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
+}
+
+.greeting-sub {
+  margin-top: 8rpx;
+}
+
+.greeting-sub text {
+  font-size: 28rpx;
+  color: rgba(255,255,255,0.85);
+}
+
+/* 轮播横幅 */
+.banner-swiper {
+  height: 200rpx;
+  margin: -30rpx 24rpx 24rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.banner-item {
+  width: 100%;
+  height: 200rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 8rpx;
+}
+
+.banner-subtitle {
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.9);
+}
+
+.banner-icon {
+  font-size: 80rpx;
+  opacity: 0.9;
+}
+
+/* 核心操作区 */
+.action-section {
+  padding: 0 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.action-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 28rpx;
+  padding: 36rpx 32rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(255, 107, 157, 0.12);
+}
+
+.main-action {
+  background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+}
+
+.main-action .action-title,
+.main-action .action-desc {
+  color: white;
+}
+
+.main-action .action-desc {
+  color: rgba(255,255,255,0.85);
+}
+
+.secondary-action {
+  background: linear-gradient(135deg, #F8B500 0%, #FF8C00 100%);
+}
+
+.secondary-action .action-title,
+.secondary-action .action-desc {
+  color: white;
+}
+
+.secondary-action .action-desc {
+  color: rgba(255,255,255,0.85);
+}
+
+.action-icon-wrapper {
+  width: 100rpx;
+  height: 100rpx;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 28rpx;
+}
+
+.action-icon {
+  font-size: 48rpx;
+}
+
+.action-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.action-desc {
+  font-size: 26rpx;
+}
+
+.action-arrow {
+  font-size: 48rpx;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+}
+
+/* 快捷入口 */
+.quick-entry {
+  display: flex;
+  justify-content: space-around;
+  padding: 24rpx;
+  background: white;
+  margin: 0 24rpx 32rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255, 107, 157, 0.08);
+}
+
+.entry-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.entry-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  margin-bottom: 12rpx;
+}
+
+.entry-icon.pink {
+  background: #FFE4EC;
+}
+
+.entry-icon.yellow {
+  background: #FFF4D6;
+}
+
+.entry-icon.purple {
+  background: #F3E5F5;
+}
+
+.entry-icon.green {
+  background: #E8F5E9;
+}
+
+.entry-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 区块标题 */
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  margin: 24rpx 32rpx 20rpx;
+  padding-left: 16rpx;
+  border-left: 8rpx solid #FF6B9D;
+}
+
+/* 每日花语卡片 */
+.poem-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #FFF9FB 0%, #FFF5F8 100%);
+  margin: 0 24rpx;
+  padding: 32rpx;
+  border-radius: 24rpx;
+  border: 2rpx solid #FFE4EC;
+  position: relative;
+  overflow: hidden;
+}
+
+.poem-card::before {
+  content: '';
+  position: absolute;
+  top: -30rpx;
+  right: -30rpx;
+  width: 120rpx;
+  height: 120rpx;
+  background: radial-gradient(circle, rgba(255,107,157,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.poem-decor {
+  font-size: 56rpx;
+  margin-right: 24rpx;
+}
+
+.poem-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.poem-flower {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #C44569;
+  margin-bottom: 8rpx;
+}
+
+.poem-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.poem-author {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.poem-arrow {
+  font-size: 40rpx;
+  color: #FF6B9D;
+  margin-left: 16rpx;
+}
+
+/* 推荐花卉 */
+.recommend-list {
+  padding: 0 24rpx;
+}
+
+.recommend-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.06);
+}
+
+.recommend-img {
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 100%);
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+
+.flower-emoji {
+  font-size: 48rpx;
+}
+
+.recommend-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recommend-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.recommend-alias {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recommend-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 底部统计 */
+.footer-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 48rpx 24rpx 0;
+  padding: 32rpx;
+  background: white;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255, 107, 157, 0.08);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #C44569;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.stat-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: #FFE4EC;
+}
+
+.safe-bottom {
+  height: 40rpx;
+}

@@ -1,0 +1,116 @@
+<view class="community-page {{fontClass}}">
+  <!-- 顶部导航 -->
+  <view class="page-header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="header-top">
+        <text class="page-title">花友圈</text>
+        <view class="publish-btn" bindtap="publishPost">
+          <text>✏️ 发布</text>
+        </view>
+      </view>
+      <text class="page-subtitle">以花会友，共享美好时光</text>
+    </view>
+  </view>
+
+  <!-- 热门话题 -->
+  <view class="topics-section">
+    <view class="section-title">
+      <text class="title-text">🔥 热门话题</text>
+    </view>
+    <scroll-view class="topics-scroll" scroll-x show-scrollbar="{{false}}">
+      <view class="topics-list">
+        <view 
+          class="topic-item" 
+          wx:for="{{hotTopics}}" 
+          wx:key="id"
+          bindtap="goToTopic"
+          data-name="{{item.name}}"
+        >
+          <text class="topic-name">{{item.name}}</text>
+          <text class="topic-count">{{item.count}}讨论</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="0">
+      <text>推荐</text>
+    </view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="1">
+      <text>关注</text>
+    </view>
+    <view class="tab-item {{currentTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-tab="2">
+      <text>同城</text>
+    </view>
+  </view>
+
+  <!-- 帖子列表 -->
+  <view class="post-list">
+    <view class="post-card" wx:for="{{postList}}" wx:key="id">
+      <!-- 用户信息 -->
+      <view class="post-header">
+        <view class="user-info" bindtap="goToUserProfile">
+          <view class="user-avatar">{{item.user.avatar}}</view>
+          <view class="user-detail">
+            <view class="user-name-row">
+              <text class="user-name">{{item.user.name}}</text>
+              <text class="user-level">{{item.user.level}}</text>
+            </view>
+            <view class="post-meta">
+              <text class="post-location">📍 {{item.location}}</text>
+              <text class="post-time"> · {{item.time}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="more-btn">
+          <text>⋯</text>
+        </view>
+      </view>
+
+      <!-- 内容 -->
+      <view class="post-content">
+        <text class="content-text">{{item.content}}</text>
+      </view>
+
+      <!-- 图片 -->
+      <view class="post-images" wx:if="{{item.images.length > 0}}">
+        <view class="image-grid image-count-{{item.images.length}}">
+          <view class="image-item" wx:for="{{item.images}}" wx:for-item="img" wx:key="*this">
+            <text class="image-emoji">{{img}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 花卉标签 -->
+      <view class="post-flower-tag" wx:if="{{item.flower}}">
+        <text class="tag tag-pink">🌸 {{item.flower}}</text>
+      </view>
+
+      <!-- 操作栏 -->
+      <view class="post-actions">
+        <view class="action-item {{item.isLiked ? 'liked' : ''}}" bindtap="toggleLike" data-id="{{item.id}}">
+          <text class="action-icon">{{item.isLiked ? '❤️' : '🤍'}}</text>
+          <text class="action-count">{{item.likes}}</text>
+        </view>
+        <view class="action-item" bindtap="commentPost" data-id="{{item.id}}">
+          <text class="action-icon">💬</text>
+          <text class="action-count">{{item.comments}}</text>
+        </view>
+        <view class="action-item" bindtap="sharePost">
+          <text class="action-icon">🔗</text>
+          <text class="action-count">分享</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 悬浮发布按钮 -->
+  <view class="fab-btn" bindtap="publishPost">
+    <text class="fab-icon">✏️</text>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

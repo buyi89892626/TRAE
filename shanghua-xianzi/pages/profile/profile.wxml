@@ -1,0 +1,209 @@
+<view class="profile-page {{fontClass}}">
+  <!-- 顶部用户区 -->
+  <view class="profile-header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="user-section">
+        <view class="avatar-wrapper">
+          <view class="avatar" wx:if="{{!userInfo}}">
+            <text>🌸</text>
+          </view>
+          <image wx:else class="avatar-img" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+        </view>
+        <view class="user-info">
+          <text class="user-name">{{userInfo ? userInfo.nickName : '花仙子访客'}}</text>
+          <view class="user-badge" wx:if="{{isVip}}">
+            <text>👑 花仙子VIP</text>
+          </view>
+          <text class="user-desc" wx:else>登录解锁更多功能</text>
+        </view>
+        <button 
+          wx:if="{{!userInfo}}" 
+          class="login-btn" 
+          bindtap="getUserInfo"
+        >
+          登录
+        </button>
+      </view>
+
+      <!-- 数据统计 -->
+      <view class="stats-row">
+        <view class="stat-item" bindtap="goToCollection">
+          <text class="stat-num">{{identifyCount}}</text>
+          <text class="stat-label">识别次数</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item" bindtap="goToCollection">
+          <text class="stat-num">{{favoriteCount}}</text>
+          <text class="stat-label">收藏花卉</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-num">{{isVip ? '∞' : '免费'}}</text>
+          <text class="stat-label">{{isVip ? 'VIP会员' : '当前等级'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- VIP卡片 -->
+  <view class="vip-card" bindtap="goToVip" wx:if="{{!isVip}}">
+    <view class="vip-left">
+      <text class="vip-icon">👑</text>
+      <view class="vip-info">
+        <text class="vip-title">升级花仙子VIP</text>
+        <text class="vip-desc">解锁全部花卉图鉴 · 高精度识别</text>
+      </view>
+    </view>
+    <view class="vip-btn">
+      <text>立即开通</text>
+    </view>
+  </view>
+
+  <!-- 功能设置区 -->
+  <view class="settings-section">
+    <view class="section-title">适老化设置</view>
+    <view class="settings-card">
+      <view class="setting-item" bindtap="selectFontSize">
+        <view class="setting-left">
+          <text class="setting-icon">🔤</text>
+          <text class="setting-name">字体大小</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-value">
+            {{settings.fontSize === 'normal' ? '标准' : settings.fontSize === 'large' ? '大号' : '特大'}}
+          </text>
+          <text class="setting-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-icon">🔊</text>
+          <text class="setting-name">语音播报</text>
+        </view>
+        <view class="setting-right">
+          <switch 
+            checked="{{settings.voiceBroadcast}}" 
+            bindchange="toggleVoiceBroadcast"
+            color="#FF6B9D"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工具区 -->
+  <view class="settings-section">
+    <view class="section-title">我的工具</view>
+    <view class="settings-card">
+      <view class="setting-item" bindtap="goToCollection">
+        <view class="setting-left">
+          <text class="setting-icon">📸</text>
+          <text class="setting-name">识别记录</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="goToCollection">
+        <view class="setting-left">
+          <text class="setting-icon">❤️</text>
+          <text class="setting-name">我的收藏</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他设置 -->
+  <view class="settings-section">
+    <view class="section-title">其他</view>
+    <view class="settings-card">
+      <view class="setting-item" bindtap="goToFeedback">
+        <view class="setting-left">
+          <text class="setting-icon">💬</text>
+          <text class="setting-name">意见反馈</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="clearCache">
+        <view class="setting-left">
+          <text class="setting-icon">🧹</text>
+          <text class="setting-name">清除缓存</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="goToAbout">
+        <view class="setting-left">
+          <text class="setting-icon">ℹ️</text>
+          <text class="setting-name">关于赏花仙子</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 字体大小选择弹窗 -->
+  <view wx:if="{{showFontSelector}}" class="modal-mask" bindtap="closeFontSelector">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <text class="modal-title">选择字体大小</text>
+        <view class="modal-close" bindtap="closeFontSelector">
+          <text>✕</text>
+        </view>
+      </view>
+      
+      <view class="font-options">
+        <view 
+          class="font-option {{settings.fontSize === 'normal' ? 'active' : ''}}" 
+          bindtap="confirmFontSize"
+          data-size="normal"
+        >
+          <view class="font-preview normal">
+            <text>标准字体</text>
+          </view>
+          <text class="font-label">标准（适合年轻人）</text>
+          <view class="check-icon" wx:if="{{settings.fontSize === 'normal'}}">✓</view>
+        </view>
+        
+        <view 
+          class="font-option {{settings.fontSize === 'large' ? 'active' : ''}}" 
+          bindtap="confirmFontSize"
+          data-size="large"
+        >
+          <view class="font-preview large">
+            <text>大号字体</text>
+          </view>
+          <text class="font-label">大号（推荐老人使用）</text>
+          <view class="check-icon" wx:if="{{settings.fontSize === 'large'}}">✓</view>
+        </view>
+        
+        <view 
+          class="font-option {{settings.fontSize === 'xlarge' ? 'active' : ''}}" 
+          bindtap="confirmFontSize"
+          data-size="xlarge"
+        >
+          <view class="font-preview xlarge">
+            <text>特大字体</text>
+          </view>
+          <text class="font-label">特大（视力不佳适用）</text>
+          <view class="check-icon" wx:if="{{settings.fontSize === 'xlarge'}}">✓</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

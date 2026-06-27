@@ -23,27 +23,19 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "识花",
-        "iconPath": "images/tab/flower.png",
-        "selectedIconPath": "images/tab/flower-active.png"
+        "text": "识花"
       },
       {
         "pagePath": "pages/poem/poem",
-        "text": "花语",
-        "iconPath": "images/tab/poem.png",
-        "selectedIconPath": "images/tab/poem-active.png"
+        "text": "花语"
       },
       {
         "pagePath": "pages/community/community",
-        "text": "花友圈",
-        "iconPath": "images/tab/community.png",
-        "selectedIconPath": "images/tab/community-active.png"
+        "text": "花友圈"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的",
-        "iconPath": "images/tab/profile.png",
-        "selectedIconPath": "images/tab/profile-active.png"
+        "text": "我的"
       }
     ]
   },

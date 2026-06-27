@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赏花仙子 - 界面预览</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      background: #f0f0f0;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 24px;
+      color: #C44569;
+      margin-bottom: 30px;
+    }
+
+    .page-title span {
+      font-size: 14px;
+      color: #999;
+      font-weight: normal;
+      margin-left: 10px;
+    }
+
+    .preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      background: #000;
+      border-radius: 40px;
+      padding: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 30px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 100;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #FFF5F8;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone-label {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 16px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .status-bar {
+      height: 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .scroll-content {
+      height: calc(100% - 44px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .scroll-content::-webkit-scrollbar {
+      width: 0;
+    }
+
+    /* ========== 首页样式 ========== */
+    .index-page .header {
+      position: relative;
+      padding: 20px 16px 40px;
+      overflow: hidden;
+    }
+
+    .index-page .header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(135deg, #FF6B9D 0%, #C44569 50%, #F8B500 100%);
+      border-radius: 0 0 30px 30px;
+      opacity: 0.9;
+    }
+
+    .index-page .header-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .index-page .greeting {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .index-page .greeting-text {
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .index-page .date-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.2);
+      padding: 4px 12px;
+      border-radius: 15px;
+    }
+
+    .index-page .greeting-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .banner-swiper {
+      height: 100px;
+      margin: -15px 12px 12px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+
+    .banner-item {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #FF6B9D 0%, #FFA07A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .banner-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .banner-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .banner-subtitle {
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .banner-icon {
+      font-size: 48px;
+      opacity: 0.9;
+    }
+
+    .action-section {
+      padding: 0 12px;
+      margin-bottom: 16px;
+    }
+
+    .action-card {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 14px;
+      padding: 18px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 16px rgba(255, 107, 157, 0.12);
+    }
+
+    .action-card.main-action {
+      background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+    }
+
+    .action-card.secondary-action {
+      background: linear-gradient(135deg, #F8B500 0%, #FF8C00 100%);
+    }
+
+    .action-icon-wrapper {
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+    }
+
+    .action-icon {
+      font-size: 24px;
+    }
+
+    .action-text {
+      flex: 1;
+    }
+
+    .action-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .action-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .action-arrow {
+      font-size: 24px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .quick-entry {
+      display: flex;
+      justify-content: space-around;
+      padding: 12px;
+      background: white;
+      margin: 0 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255, 107, 157, 0.08);
+    }
+
+    .entry-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .entry-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .entry-icon.pink { background: #FFE4EC; }
+    .entry-icon.yellow { background: #FFF4D6; }
+    .entry-icon.purple { background: #F3E5F5; }
+    .entry-icon.green { background: #E8F5E9; }
+
+    .entry-text {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      margin: 16px 16px 10px;
+      padding-left: 8px;
+      border-left: 4px solid #FF6B9D;
+    }
+
+    .poem-card {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #FFF9FB 0%, #FFF5F8 100%);
+      margin: 0 12px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #FFE4EC;
+    }
+
+    .poem-decor {
+      font-size: 28px;
+      margin-right: 12px;
+    }
+
+    .poem-content {
+      flex: 1;
+    }
+
+    .poem-flower {
+      font-size: 14px;
+      font-weight: bold;
+      color: #C44569;
+      margin-bottom: 4px;
+    }
+
+    .poem-text {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .poem-author {
+      font-size: 11px;
+      color: #999;
+    }
+
+    .poem-arrow {
+      font-size: 20px;
+      color: #FF6B9D;
+      margin-left: 8px;
+    }
+
+    .recommend-list {
+      padding: 0 12px;
+    }
+
+    .recommend-item {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(255, 107, 157, 0.06);
+    }
+
+    .recommend-img {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+
+    .flower-emoji {
+      font-size: 24px;
+    }
+
+    .recommend-info {
+      flex: 1;
+    }
+
+    .recommend-name {
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 3px;
+    }
+
+    .recommend-alias {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+    }
+
+    .tag-pink {
+      background: #FFE4EC;
+      color: #C44569;
+    }
+
+    .footer-stats {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 24px 12px 0;
+      padding: 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255, 107, 157, 0.08);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-num {
+      font-size: 18px;
+      font-weight: bold;
+      color: #C44569;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #999;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 30px;
+      background: #FFE4EC;
+    }
+
+    .tab-bar-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: white;
+      display: flex;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .tab-item-bottom {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #999;
+    }
+
+    .tab-item-bottom.active {
+      color: #FF6B9D;
+    }
+
+    .tab-icon-bottom {
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+
+    .scroll-with-tab {
+      height: calc(100% - 44px - 60px) !important;
+    }
+
+    /* ========== 相机页样式 ========== */
+    .camera-page {
+      background: #000;
+    }
+
+    .camera-view {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+      position: relative;
+    }
+
+    .camera-top-bar {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+      z-index: 10;
+    }
+
+    .top-btn {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .top-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .guide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .guide-box {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      border: 2px solid rgba(255, 107, 157, 0.6);
+      border-radius: 12px;
+      background: rgba(255, 107, 157, 0.05);
+    }
+
+    .guide-corner {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-color: #FF6B9D;
+      border-style: solid;
+    }
+
+    .guide-corner.tl { top: -2px; left: -2px; border-width: 4px 0 0 4px; border-top-left-radius: 8px; }
+    .guide-corner.tr { top: -2px; right: -2px; border-width: 4px 4px 0 0; border-top-right-radius: 8px; }
+    .guide-corner.bl { bottom: -2px; left: -2px; border-width: 0 0 4px 4px; border-bottom-left-radius: 8px; }
+    .guide-corner.br { bottom: -2px; right: -2px; border-width: 0 4px 4px 0; border-bottom-right-radius: 8px; }
+
+    .guide-tip {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.6);
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+
+    .guide-tip-text {
+      color: white;
+      font-size: 13px;
+    }
+
+    .camera-bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px 30px 40px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+    }
+
+    .bottom-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 60px;
+    }
+
+    .btn-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .btn-text {
+      font-size: 11px;
+      color: white;
+    }
+
+    .shutter-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .shutter-outer {
+      width: 70px;
+      height: 70px;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+
+    .shutter-inner {
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+      border-radius: 50%;
+      box-shadow: 0 2px 10px rgba(255, 107, 157, 0.5);
+    }
+
+    .shutter-tip {
+      font-size: 11px;
+      color: white;
+    }
+
+    /* ========== 结果页样式 ========== */
+    .result-page {
+      background: #FFF5F8;
+      padding-bottom: 80px;
+    }
+
+    .image-section {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 50%, #F3E5F5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-section .flower-emoji {
+      font-size: 90px;
+    }
+
+    .result-top-bar {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+
+    .result-top-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .score-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: rgba(46, 125, 50, 0.9);
+    }
+
+    .score-num {
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .score-label {
+      font-size: 10px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .name-section {
+      background: white;
+      margin: -15px 12px 0;
+      border-radius: 14px 14px 0 0;
+      padding: 16px;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 -2px 10px rgba(255, 107, 157, 0.1);
+    }
+
+    .flower-name-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .flower-name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #C44569;
+      flex: 1;
+    }
+
+    .voice-btn, .favorite-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      font-size: 14px;
+    }
+
+    .voice-btn { background: #E8F5E9; }
+    .favorite-btn { background: #FFEBEE; }
+
+    .flower-alias {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .flower-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-yellow {
+      background: #FFF4D6;
+      color: #B8860B;
+    }
+
+    .tag-purple {
+      background: #F3E5F5;
+      color: #7B1FA2;
+    }
+
+    .result-tab-bar {
+      display: flex;
+      background: white;
+      margin: 0 12px;
+      padding: 0 8px;
+      border-bottom: 1px solid #FFE4EC;
+    }
+
+    .result-tab-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 0;
+      font-size: 13px;
+      color: #999;
+      position: relative;
+    }
+
+    .result-tab-item.active {
+      color: #FF6B9D;
+      font-weight: 500;
+    }
+
+    .result-tab-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 3px;
+      background: linear-gradient(90deg, #FF6B9D, #C44569);
+      border-radius: 2px;
+    }
+
+    .tab-content {
+      background: white;
+      margin: 0 12px 12px;
+      border-radius: 0 0 12px 12px;
+      padding: 12px;
+      box-shadow: 0 2px 10px rgba(255, 107, 157, 0.08);
+    }
+
+    .info-card {
+      margin-bottom: 12px;
+    }
+
+    .info-title {
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .title-icon {
+      font-size: 15px;
+      margin-right: 6px;
+    }
+
+    .info-text {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .care-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #FFF0F5;
+    }
+
+    .care-item:last-child {
+      border-bottom: none;
+    }
+
+    .care-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .care-icon.water { background: #E3F2FD; }
+    .care-icon.light { background: #FFF8E1; }
+    .care-icon.temp { background: #FFEBEE; }
+    .care-icon.soil { background: #EFEBE9; }
+    .care-icon.fertilizer { background: #E8F5E9; }
+
+    .care-info {
+      flex: 1;
+    }
+
+    .care-label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 3px;
+      display: block;
+    }
+
+    .care-desc {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .safety-card {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: #E8F5E9;
+    }
+
+    .safety-icon {
+      font-size: 28px;
+      margin-right: 12px;
+    }
+
+    .safety-info { flex: 1; }
+
+    .safety-level {
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .safety-desc {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .safety-tips {
+      background: #FFF9FB;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .tip-item {
+      display: flex;
+      align-items: center;
+      padding: 6px 0;
+    }
+
+    .tip-icon { font-size: 14px; margin-right: 6px; }
+    .tip-text { font-size: 12px; color: #666; }
+
+    .flower-language-card {
+      background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EC 100%);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .lang-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .lang-icon { font-size: 18px; margin-right: 4px; }
+
+    .lang-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #C44569;
+    }
+
+    .lang-text {
+      font-size: 18px;
+      font-weight: 500;
+      color: #C44569;
+      line-height: 1.6;
+    }
+
+    .poem-detail-card {
+      background: #FFFAF0;
+      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid #FFE4B5;
+    }
+
+    .poem-detail-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .poem-detail-icon { font-size: 16px; margin-right: 4px; }
+
+    .poem-detail-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #B8860B;
+    }
+
+    .poem-detail-content { text-align: center; }
+
+    .poem-detail-text {
+      font-size: 14px;
+      color: #8B4513;
+      line-height: 2;
+      font-style: italic;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .poem-detail-author {
+      font-size: 12px;
+      color: #D2691E;
+    }
+
+    .bottom-action-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 12px;
+      background: white;
+      box-shadow: 0 -2px 10px rgba(255, 107, 157, 0.1);
+    }
+
+    .bottom-action-btn {
+      flex: 1;
+      height: 44px;
+      border-radius: 22px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 4px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .bottom-action-btn.primary {
+      background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+      color: white;
+      flex: 1.5;
+      box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+    }
+
+    .bottom-action-btn.secondary {
+      background: #FFF0F5;
+      color: #C44569;
+    }
+
+    .bottom-action-btn.outline {
+      background: white;
+      color: #FF6B9D;
+      border: 1px solid #FF6B9D;
+    }
+
+    /* ========== 花语页样式 ========== */
+    .poem-page {
+      background: linear-gradient(180deg, #FFF5F8 0%, #FFF0F5 50%, #FFFAF0 100%);
+      padding-bottom: 60px;
+    }
+
+    .daily-section {
+      padding: 20px 12px 12px;
+    }
+
+    .daily-card {
+      background: linear-gradient(135deg, #FFE4EC 0%, #FFF4D6 50%, #F3E5F5 100%);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .daily-label {
+      font-size: 13px;
+      font-weight: bold;
+      color: #C44569;
+    }
+
+    .daily-date {
+      font-size: 11px;
+      color: #999;
+      background: rgba(255,255,255,0.6);
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+
+    .flower-name-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .daily-flower {
+      font-size: 26px;
+      font-weight: bold;
+      color: #C44569;
+    }
+
+    .actions-row { display: flex; }
+
+    .mini-btn {
+      width: 30px;
+      height: 30px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 6px;
+      font-size: 14px;
+    }
+
+    .poem-content-section {
+      background: rgba(255,255,255,0.6);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .footer-btn {
+      height: 40px;
+      border-radius: 20px;
+      font-size: 13px;
+      padding: 0 24px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .footer-btn.primary {
+      background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(255, 107, 157, 0.4);
+    }
+
+    .footer-btn.outline {
+      background: rgba(255,255,255,0.8);
+      color: #C44569;
+      border: 1px solid #FF6B9D;
+    }
+
+    /* ========== 个人中心样式 ========== */
+    .profile-page {
+      background: linear-gradient(180deg, #FFF5F8 0%, #FFF0F5 100%);
+      padding-bottom: 60px;
+    }
+
+    .profile-header {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 16px;
+    }
+
+    .profile-header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(135deg, #FF6B9D 0%, #C44569 50%, #F8B500 100%);
+      border-radius: 0 0 30px 30px;
+      opacity: 0.9;
+    }
+
+    .profile-header-content {
+      position: relative;
+      z-index: 1;
+      padding: 10px 16px 0;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .avatar-wrapper { margin-right: 12px; }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+
+    .profile-user-info { flex: 1; }
+
+    .profile-user-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .profile-user-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .login-btn {
+      background: rgba(255,255,255,0.25);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 15px;
+      font-size: 13px;
+      height: 32px;
+      padding: 0 14px;
+    }
+
+    .profile-stats-row {
+      display: flex;
+      background: white;
+      border-radius: 12px;
+      padding: 16px 0;
+      box-shadow: 0 4px 16px rgba(255, 107, 157, 0.15);
+    }
+
+    .vip-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 12px;
+      padding: 14px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(26, 26, 46, 0.3);
+    }
+
+    .vip-left { display: flex; align-items: center; }
+
+    .vip-icon { font-size: 24px; margin-right: 8px; }
+
+    .vip-info { display: flex; flex-direction: column; }
+
+    .vip-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #FFD700;
+      margin-bottom: 2px;
+    }
+
+    .vip-desc {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .vip-btn {
+      background: linear-gradient(135deg, #F8B500 0%, #FFD700 100%);
+      padding: 6px 14px;
+      border-radius: 15px;
+    }
+
+    .vip-btn span {
+      font-size: 12px;
+      color: #8B4513;
+      font-weight: bold;
+    }
+
+    .settings-section { margin-bottom: 12px; }
+
+    .settings-section-title {
+      font-size: 13px;
+      color: #999;
+      margin: 0 16px 8px;
+    }
+
+    .settings-card {
+      background: white;
+      margin: 0 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(255, 107, 157, 0.06);
+    }
+
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 12px;
+      border-bottom: 1px solid #FFF0F5;
+    }
+
+    .setting-item:last-child { border-bottom: none; }
+
+    .setting-left { display: flex; align-items: center; }
+
+    .setting-icon { font-size: 16px; margin-right: 8px; }
+
+    .setting-name { font-size: 14px; color: #333; }
+
+    .setting-right { display: flex; align-items: center; }
+
+    .setting-value { font-size: 13px; color: #999; margin-right: 4px; }
+
+    .setting-arrow { font-size: 16px; color: #CCC; }
+
+    .switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: #e0e0e0;
+      border-radius: 12px;
+    }
+
+    .switch.active {
+      background: #FF6B9D;
+    }
+
+    .switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .switch.active::after {
+      left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="page-title">🌸 赏花仙子 - 界面预览 <span>微信小程序</span></h1>
+  
+  <div class="preview-container">
+    <!-- 首页预览 -->
+    <div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 🔋</span>
+          </div>
+          <div class="scroll-content scroll-with-tab index-page">
+            <div class="header">
+              <div class="header-bg"></div>
+              <div class="header-content">
+                <div class="greeting">
+                  <span class="greeting-text">🌸 赏花仙子</span>
+                  <span class="date-text">6月27日</span>
+                </div>
+                <div class="greeting-sub">
+                  一花一世界 · 一叶一菩提
+                </div>
+              </div>
+            </div>
+            
+            <div class="banner-swiper">
+              <div class="banner-item">
+                <div class="banner-content">
+                  <span class="banner-title">春日赏花指南</span>
+                  <span class="banner-subtitle">三月桃花笑春风</span>
+                </div>
+                <div class="banner-icon">🌺</div>
+              </div>
+            </div>
+
+            <div class="action-section">
+              <div class="action-card main-action">
+                <div class="action-icon-wrapper">
+                  <span class="action-icon">📷</span>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">拍照识花</div>
+                  <div class="action-desc">对准花朵，一键识别</div>
+                </div>
+                <span class="action-arrow">›</span>
+              </div>
+              <div class="action-card secondary-action">
+                <div class="action-icon-wrapper">
+                  <span class="action-icon">🖼️</span>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">相册选图</div>
+                  <div class="action-desc">从相册选择照片识别</div>
+                </div>
+                <span class="action-arrow">›</span>
+              </div>
+            </div>
+
+            <div class="quick-entry">
+              <div class="entry-item">
+                <div class="entry-icon pink">📚</div>
+                <span class="entry-text">识别记录</span>
+              </div>
+              <div class="entry-item">
+                <div class="entry-icon yellow">❤️</div>
+                <span class="entry-text">我的收藏</span>
+              </div>
+              <div class="entry-item">
+                <div class="entry-icon purple">📜</div>
+                <span class="entry-text">花语诗签</span>
+              </div>
+              <div class="entry-item">
+                <div class="entry-icon green">👥</div>
+                <span class="entry-text">花友圈</span>
+              </div>
+            </div>
+
+            <div class="section-title">每日花语</div>
+            <div class="poem-card">
+              <span class="poem-decor">🌸</span>
+              <div class="poem-content">
+                <span class="poem-flower">梅花</span>
+                <span class="poem-text">墙角数枝梅，凌寒独自开。遥知不是雪...</span>
+                <span class="poem-author">—— 王安石《梅花》</span>
+              </div>
+              <span class="poem-arrow">›</span>
+            </div>
+
+            <div class="section-title">今日推荐</div>
+            <div class="recommend-list">
+              <div class="recommend-item">
+                <div class="recommend-img">
+                  <span class="flower-emoji">🌷</span>
+                </div>
+                <div class="recommend-info">
+                  <div class="recommend-name">月季</div>
+                  <div class="recommend-alias">月月红、长春花</div>
+                  <span class="tag tag-pink">蔷薇科</span>
+                </div>
+              </div>
+              <div class="recommend-item">
+                <div class="recommend-img">
+                  <span class="flower-emoji">🌻</span>
+                </div>
+                <div class="recommend-info">
+                  <div class="recommend-name">牡丹</div>
+                  <div class="recommend-alias">富贵花、洛阳花</div>
+                  <span class="tag tag-pink">毛茛科</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer-stats">
+              <div class="stat-item">
+                <span class="stat-num">0</span>
+                <span class="stat-label">次识别</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-num">20000+</span>
+                <span class="stat-label">花卉库</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-num">96%</span>
+                <span class="stat-label">准确率</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-bar-bottom">
+            <div class="tab-item-bottom active">
+              <span class="tab-icon-bottom">🌸</span>
+              <span>识花</span>
+            </div>
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">📜</span>
+              <span>花语</span>
+            </div>
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">👥</span>
+              <span>花友圈</span>
+            </div>
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">👤</span>
+              <span>我的</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="phone-label">首页 - 识花入口</p>
+    </div>
+
+    <!-- 相机页预览 -->
+    <div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen camera-page">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 🔋</span>
+          </div>
+          <div class="camera-view">
+            <div class="camera-top-bar">
+              <div class="top-btn">✕</div>
+              <span class="top-title">拍照识花</span>
+              <div class="top-btn">⚡</div>
+            </div>
+
+            <div class="guide-overlay">
+              <div class="guide-box">
+                <div class="guide-corner tl"></div>
+                <div class="guide-corner tr"></div>
+                <div class="guide-corner bl"></div>
+                <div class="guide-corner br"></div>
+              </div>
+              <div class="guide-tip">
+                <span class="guide-tip-text">🌸 把花朵放进粉色框内</span>
+              </div>
+            </div>
+
+            <div class="camera-bottom-bar">
+              <div class="bottom-btn">
+                <span class="btn-icon">🖼️</span>
+                <span class="btn-text">相册</span>
+              </div>
+              <div class="shutter-wrapper">
+                <div class="shutter-outer">
+                  <div class="shutter-inner"></div>
+                </div>
+                <span class="shutter-tip">拍照识别</span>
+              </div>
+              <div class="bottom-btn">
+                <span class="btn-icon">🔄</span>
+                <span class="btn-text">翻转</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="phone-label">相机页 - 粉色取景框</p>
+    </div>
+
+    <!-- 结果页预览 -->
+    <div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 🔋</span>
+          </div>
+          <div class="scroll-content result-page">
+            <div class="image-section">
+              <span class="flower-emoji">🌹</span>
+              <div class="result-top-bar">
+                <div class="result-top-btn">←</div>
+                <div class="result-top-btn">🏠</div>
+              </div>
+              <div class="score-badge">
+                <span class="score-num">97.5%</span>
+                <span class="score-label">匹配度</span>
+              </div>
+            </div>
+
+            <div class="name-section">
+              <div class="flower-name-row">
+                <span class="flower-name">月季</span>
+                <div class="voice-btn">🔊</div>
+                <div class="favorite-btn">🤍</div>
+              </div>
+              <span class="flower-alias">别名：月月红、长春花、四季花</span>
+              <div class="flower-tags">
+                <span class="tag tag-pink">蔷薇科蔷薇属</span>
+                <span class="tag tag-yellow">花期4-9月</span>
+                <span class="tag tag-purple">观赏花卉</span>
+              </div>
+            </div>
+
+            <div class="result-tab-bar">
+              <div class="result-tab-item active">🌿 简介</div>
+              <div class="result-tab-item">💧 养护</div>
+              <div class="result-tab-item">⚠️ 安全</div>
+              <div class="result-tab-item">📜 花语</div>
+            </div>
+
+            <div class="tab-content">
+              <div class="info-card">
+                <div class="info-title">
+                  <span class="title-icon">🌸</span>
+                  植物百科
+                </div>
+                <div class="info-text">
+                  月季被称为花中皇后，又称月月红，是常绿、半常绿低矮灌木，四季开花，一般为红色或粉色，偶有白色和黄色，可作为观赏植物，也可作为药用植物。
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-title">
+                  <span class="title-icon">🏡</span>
+                  原产地
+                </div>
+                <div class="info-text">中国</div>
+              </div>
+            </div>
+
+            <div class="bottom-action-bar">
+              <button class="bottom-action-btn secondary">🤍 收藏</button>
+              <button class="bottom-action-btn primary">🌸 分享花友圈</button>
+              <button class="bottom-action-btn outline">📤 分享</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="phone-label">结果页 - 花卉详情</p>
+    </div>
+
+    <!-- 花语页预览 -->
+    <div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 🔋</span>
+          </div>
+          <div class="scroll-content scroll-with-tab poem-page">
+            <div class="daily-section">
+              <div class="daily-card">
+                <div class="card-header">
+                  <span class="daily-label">🌸 今日花语</span>
+                  <span class="daily-date">6月27日 周六</span>
+                </div>
+                <div class="flower-name-section">
+                  <span class="daily-flower">梅花</span>
+                  <div class="actions-row">
+                    <div class="mini-btn">🔄</div>
+                    <div class="mini-btn">🔊</div>
+                  </div>
+                </div>
+                <div class="poem-content-section">
+                  <span style="font-size:16px;color:#8B4513;line-height:2;font-style:italic;display:block;text-align:center;">
+                    墙角数枝梅，凌寒独自开。<br>
+                    遥知不是雪，为有暗香来。
+                  </span>
+                  <span style="font-size:12px;color:#A0522D;display:block;text-align:right;margin-top:8px;">
+                    —— 王安石《梅花》
+                  </span>
+                </div>
+                <div class="card-footer">
+                  <button class="footer-btn primary">生成诗签</button>
+                  <button class="footer-btn outline">分享</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="result-tab-bar" style="margin:0 12px 12px;border-radius:10px;padding:4px;">
+              <div class="result-tab-item active">📜 古诗词</div>
+              <div class="result-tab-item">💝 花语大全</div>
+            </div>
+
+            <div style="padding:0 12px;">
+              <div style="background:white;border-radius:10px;padding:12px;margin-bottom:8px;box-shadow:0 2px 8px rgba(255,107,157,0.06);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                  <span style="background:#FFE4EC;padding:4px 10px;border-radius:10px;font-size:12px;color:#C44569;font-weight:500;">🌸 荷花</span>
+                  <div style="display:flex;gap:12px;">
+                    <span>🔊</span>
+                    <span>🤍</span>
+                  </div>
+                </div>
+                <div style="background:#FFFAF0;border-radius:8px;padding:10px;border-left:3px solid #F8B500;">
+                  <span style="font-size:13px;color:#8B4513;line-height:1.8;font-style:italic;">
+                    毕竟西湖六月中，风光不与四时同。接天莲叶无穷碧，映日荷花别样红。
+                  </span>
+                  <span style="font-size:11px;color:#A0522D;display:block;text-align:right;margin-top:4px;">
+                    —— 杨万里
+                  </span>
+                </div>
+              </div>
+
+              <div style="background:white;border-radius:10px;padding:12px;margin-bottom:8px;box-shadow:0 2px 8px rgba(255,107,157,0.06);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                  <span style="background:#FFE4EC;padding:4px 10px;border-radius:10px;font-size:12px;color:#C44569;font-weight:500;">🌸 牡丹</span>
+                  <div style="display:flex;gap:12px;">
+                    <span>🔊</span>
+                    <span>🤍</span>
+                  </div>
+                </div>
+                <div style="background:#FFFAF0;border-radius:8px;padding:10px;border-left:3px solid #F8B500;">
+                  <span style="font-size:13px;color:#8B4513;line-height:1.8;font-style:italic;">
+                    庭前芍药妖无格，池上芙蕖净少情。唯有牡丹真国色，花开时节动京城。
+                  </span>
+                  <span style="font-size:11px;color:#A0522D;display:block;text-align:right;margin-top:4px;">
+                    —— 刘禹锡
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-bar-bottom">
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">🌸</span>
+              <span>识花</span>
+            </div>
+            <div class="tab-item-bottom active">
+              <span class="tab-icon-bottom">📜</span>
+              <span>花语</span>
+            </div>
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">👥</span>
+              <span>花友圈</span>
+            </div>
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">👤</span>
+              <span>我的</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="phone-label">花语诗签页 - 差异化功能</p>
+    </div>
+
+    <!-- 个人中心预览 -->
+    <div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 🔋</span>
+          </div>
+          <div class="scroll-content scroll-with-tab profile-page">
+            <div class="profile-header">
+              <div class="profile-header-bg"></div>
+              <div class="profile-header-content">
+                <div class="user-section">
+                  <div class="avatar-wrapper">
+                    <div class="avatar">🌸</div>
+                  </div>
+                  <div class="profile-user-info">
+                    <span class="profile-user-name">花仙子访客</span>
+                    <span class="profile-user-desc">登录解锁更多功能</span>
+                  </div>
+                  <button class="login-btn">登录</button>
+                </div>
+
+                <div class="profile-stats-row">
+                  <div class="stat-item">
+                    <span class="stat-num">0</span>
+                    <span class="stat-label">识别次数</span>
+                  </div>
+                  <div class="stat-divider"></div>
+                  <div class="stat-item">
+                    <span class="stat-num">0</span>
+                    <span class="stat-label">收藏花卉</span>
+                  </div>
+                  <div class="stat-divider"></div>
+                  <div class="stat-item">
+                    <span class="stat-num">免费</span>
+                    <span class="stat-label">当前等级</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vip-card">
+              <div class="vip-left">
+                <span class="vip-icon">👑</span>
+                <div class="vip-info">
+                  <span class="vip-title">升级花仙子VIP</span>
+                  <span class="vip-desc">解锁全部花卉图鉴 · 高精度识别</span>
+                </div>
+              </div>
+              <div class="vip-btn">
+                <span>立即开通</span>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-title">适老化设置</div>
+              <div class="settings-card">
+                <div class="setting-item">
+                  <div class="setting-left">
+                    <span class="setting-icon">🔤</span>
+                    <span class="setting-name">字体大小</span>
+                  </div>
+                  <div class="setting-right">
+                    <span class="setting-value">大号</span>
+                    <span class="setting-arrow">›</span>
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-left">
+                    <span class="setting-icon">🔊</span>
+                    <span class="setting-name">语音播报</span>
+                  </div>
+                  <div class="setting-right">
+                    <div class="switch active"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-title">我的工具</div>
+              <div class="settings-card">
+                <div class="setting-item">
+                  <div class="setting-left">
+                    <span class="setting-icon">📸</span>
+                    <span class="setting-name">识别记录</span>
+                  </div>
+                  <div class="setting-right">
+                    <span class="setting-arrow">›</span>
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-left">
+                    <span class="setting-icon">❤️</span>
+                    <span class="setting-name">我的收藏</span>
+                  </div>
+                  <div class="setting-right">
+                    <span class="setting-arrow">›</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-title">其他</div>
+              <div class="settings-card">
+                <div class="setting-item">
+                  <div class="setting-left">
+                    <span class="setting-icon">💬</span>
+                    <span class="setting-name">意见反馈</span>
+                  </div>
+                  <div class="setting-right">
+                    <span class="setting-arrow">›</span>
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-left">
+                    <span class="setting-icon">ℹ️</span>
+                    <span class="setting-name">关于赏花仙子</span>
+                  </div>
+                  <div class="setting-right">
+                    <span class="setting-arrow">›</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-bar-bottom">
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">🌸</span>
+              <span>识花</span>
+            </div>
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">📜</span>
+              <span>花语</span>
+            </div>
+            <div class="tab-item-bottom">
+              <span class="tab-icon-bottom">👥</span>
+              <span>花友圈</span>
+            </div>
+            <div class="tab-item-bottom active">
+              <span class="tab-icon-bottom">👤</span>
+              <span>我的</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="phone-label">个人中心 - 适老化设置</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;color:#999;font-size:14px;">
+    🌸 赏花仙子 · 拍照识花 · 花语诗签 · 花友社区
+  </div>
+</body>
+</html>
